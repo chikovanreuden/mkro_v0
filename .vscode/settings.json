@@ -1,0 +1,11 @@
+{
+    "python.analysis.extraPaths": [
+        "./lib",
+        "./lib/adafruit_hid/key"
+    ],
+    "python.languageServer": "Pylance",
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportMissingModuleSource": "none",
+        "reportShadowedImports": "none"
+    }
+}

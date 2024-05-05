@@ -1,0 +1,21 @@
+{
+    "profiles": [
+        {
+            "name": "Profile 1"
+        }
+    ],
+    "keys": [
+        {
+            "id": "F24",
+            "gpio": "GP7",
+            "layer": [
+                {
+                    "type": "key",
+                    "keys": [
+                        "F24"
+                    ]
+                }
+            ]
+        }
+    ] 
+}
