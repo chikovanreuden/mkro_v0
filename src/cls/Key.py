@@ -26,8 +26,8 @@ keys = [
     Key( "F22", board.GP11, "key", [ [ Keycode.F22 ] ] ),
     Key( "F23", board.GP20, "key", [ [ Keycode.F23 ] ] ),
     Key( "F24", board.GP7, "key", [ [ Keycode.F24 ], [ Keycode.CONTROL, Keycode.A ] ],  ),
-    Key( "makro1", board.GP2, "profileswitcher", None ),
-    Key( "makro2", board.GP10, "profileswitcher_next", None ),
-    Key( "makro3", board.GP21, "profileswitcher_previous", None ),
-    Key( "makro4", board.GP6, "key", None ),
+    Key( "mkr1", board.GP2, "profileswitcher", None ),
+    Key( "mkr2", board.GP10, "profileswitcher_next", None ),
+    Key( "mkr3", board.GP21, "profileswitcher_previous", None ),
+    Key( "mkr4", board.GP6, "key", None ),
 ]
