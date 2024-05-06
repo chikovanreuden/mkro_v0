@@ -6,10 +6,10 @@ import json
 from adafruit_hid.keyboard import Keyboard
 from adafruit_debouncer import Debouncer
 
-from src.cls.Key import keys
+from src.cls.Key import keys, matrix
 from src.cls.LED import leds
 from src.cls.Profile import Profile
-from src.display import Display
+from src.cls.display import Display
 
 display = Display()
 
@@ -32,6 +32,20 @@ def change_led():
         else:
             leds[ idx ].pin.value = False
 
+def change_display():
+    change_led()
+    rows = [""] * 4
+    idz = 0
+    for row in matrix:
+        for k in row:
+            
+            rows[idz] += " " + '{: <4}'.format(k.name[:4])
+        idz += 1
+    display.header = "Chiko Makro V0"
+    display.subheader = "Profile " + str( Profile.current ) 
+    display.lines = rows
+    display.update()
+    
 for led in leds:
     led.pin = digitalio.DigitalInOut( led.gpio )
     led.pin.direction = digitalio.Direction.OUTPUT
@@ -50,33 +64,6 @@ Profile( "Profile Uno" )
 Profile( "Profile Two" )
 
 change_led()
-
-last_updatetime = 0
-update_delay = 0.1
-
-def change_display():
-    change_led()
-    # rows = [
-    #     " 1234 1234 1234 1234 ",
-    #     " 1234 1234 1234 1234 ",
-    #     " 1234 1234 1234 1234 ",
-    #     " 1234 1234 1234 1234 ",
-    # ]
-    rows = [""] * 4
-    idx = 0
-    for k in reversed( keys ):
-       rows[idx % 4] += " " + k.name[:4]
-       idx += 1
-    display.update_line(1, "      Profile " + str( Profile.current ))
-    display.update_line(2, rows[0]);
-    display.update_line(3, "");
-    display.update_line(4, rows[1]);
-    display.update_line(5, "");
-    display.update_line(6, rows[2]);
-    display.update_line(7, "");
-    display.update_line(8, rows[3]);
-    display.update()
-    
 change_display()
 
 while True:
@@ -86,6 +73,7 @@ while True:
             print( k.name + ' pressed' + " | Profile: " + str( Profile.current ) + " | Layer: " + str( Profile.current-1 ))
             if ( k.type == "profileswitcher" ):
                 newProf = Profile.next()
+                change_led()
                 change_display()
             if ( k.type == "key"):
                 if ( k.key and ( len( k.key ) > ( Profile.current -1 ) ) ):
