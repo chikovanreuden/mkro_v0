@@ -22,5 +22,4 @@ class Profile:
             Profile.current = 1
         else:
             Profile.current = Profile.current + 1
-        Profile.change_led()
         return Profile.current
